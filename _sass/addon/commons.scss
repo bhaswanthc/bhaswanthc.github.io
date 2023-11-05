@@ -571,6 +571,13 @@ main {
   }
 }
 
+/* Overwrite bootstrap button hover background color */
+
+.btn:hover {
+  background-color: #163c24a3;
+  border-color: #000000;
+}
+
 /* --- Effects classes --- */
 
 .loaded {
@@ -614,11 +621,11 @@ main {
 }
 
 /* Overwrite bootstrap outline button */
-.btn.btn-outline-primary {
+/*.btn.btn-outline-primary {
   &:not(.disabled):hover {
     border-color: #007bff !important;
   }
-}
+} */
 
 .disabled {
   color: rgb(206, 196, 196);
