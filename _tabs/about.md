@@ -11,8 +11,8 @@ On this website, you can find my write-ups and some other security stuff.
 ```
 
 ```
+✅ CDSA Certified
 ✅ CEH Certified
-✅ CDSA [Ongoing]
 ✅ Hack The Box SOC Analyst Path
 ✅ Hack The Box Academy: Top 1%
 ✅ Hack The Box Rank: Hacker
