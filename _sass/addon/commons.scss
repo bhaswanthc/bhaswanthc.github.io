@@ -822,9 +822,11 @@ $btn-mb: 0.5rem;
   }
 
   .sidebar-bottom {
-    padding-left: 2rem;
+    padding-left: 1rem;
     padding-right: 1rem;
     margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
 
     $btn-size: 1.75rem;
 
